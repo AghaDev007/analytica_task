@@ -36,10 +36,7 @@ class HomeView extends StatelessWidget {
                 verticalGap(context.height * .07),
                 Row(
                   children: [
-                    Icon(
-                      Icons.location_pin,
-                      color: Colors.orange.shade700,
-                    ),
+                    const Icon(Icons.location_pin, color: AppTheme.primary),
                     horizontalGap(5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,23 +120,23 @@ class HomeView extends StatelessWidget {
                         showCursor: true,
                         style: TextStyles.black512.copyWith(
                             color: Colors.black), // Ensure text color is set
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.search,
-                            color: Colors.orange.shade700,
+                            color: AppTheme.primary,
                             size: 30,
                           ),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const VerticalDivider(
+                              VerticalDivider(
                                 indent: 15,
                                 endIndent: 15,
                                 color: Colors.black26,
                               ),
                               Icon(
                                 Icons.mic,
-                                color: Colors.orange.shade700,
+                                color: AppTheme.primary,
                               ),
                             ],
                           ),

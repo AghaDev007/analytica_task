@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:analytica_task/utils/app_routes.dart';
 import 'package:analytica_task/utils/app_theme.dart';
@@ -8,7 +9,7 @@ import 'package:analytica_task/utils/text_styles.dart';
 import 'package:analytica_task/utils/widgets/button_widget.dart';
 import 'package:analytica_task/utils/widgets/richtext_button_widget.dart';
 import 'package:analytica_task/utils/widgets/text_field_widget.dart';
-import '../../../utils/app_images.dart';
+import '../../../../utils/app_images.dart';
 import '../controller/login_controller.dart';
 
 class LoginView extends StatelessWidget {
@@ -32,12 +33,10 @@ class LoginView extends StatelessWidget {
                   child: Column(
                     children: [
                       verticalGap(context.height * .1),
-                      Image.asset(
-                        AppImages.logo,
-                        height: context.height * 0.3,
-                        width: context.width * 0.7,
-                        fit: BoxFit.fill,
-                      ),
+                      Lottie.asset('assets/login.json',
+                          width: context.width * 0.8),
+                      verticalGap(10),
+                   
                       const Text(
                         "Welcome Back",
                         style: TextStyles.black624,
@@ -91,9 +90,7 @@ class LoginView extends StatelessWidget {
                         width: context.width * .88,
                         alignment: Alignment.topRight,
                         child: InkWell(
-                          onTap: () {
-                         
-                          },
+                          onTap: () {},
                           child: const Text(
                             "Forgot Password?",
                             style: TextStyles.black514,

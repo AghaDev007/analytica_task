@@ -1,36 +1,34 @@
 import 'package:analytica_task/utils/app_images.dart';
 import 'package:analytica_task/utils/app_routes.dart';
+import 'package:analytica_task/utils/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
   Future signin(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      
+
       return 200;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
-        Get.snackbar("Error", "Invalid email or password");
+        Get.snackbar("Error", "Invalid email or password",
+            backgroundColor: AppTheme.primary, colorText: AppTheme.white);
 
         return 300;
       } else {
-        Get.snackbar("Error", "An unexpected error occurred");
+        Get.snackbar("Error", "An unexpected error occurred",
+            backgroundColor: AppTheme.primary, colorText: AppTheme.white);
 
         return 300;
       }
     }
-  
   }
-
- 
 
   Future signup(
     String email,

@@ -6,7 +6,6 @@ import 'package:analytica_task/views/product_detail/product_detail_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:analytica_task/services/auth_services.dart';
 import 'package:analytica_task/utils/app_theme.dart';
 import 'package:analytica_task/utils/gaps.dart';
 import 'package:analytica_task/utils/text_styles.dart';
@@ -26,7 +25,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppTheme.white,
-      body: Container(
+      body: SizedBox(
         width: context.width,
         height: context.height,
         child: SingleChildScrollView(
@@ -46,11 +45,13 @@ class HomeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _auth.currentUser!.email!,
+                          _auth.currentUser!.email!.length > 16
+                              ? '${_auth.currentUser!.email!.substring(0, 16)}...'
+                              : _auth.currentUser!.email!,
                           style: TextStyles.black514,
                         ),
                         const Text(
-                          'Gujranwala',
+                          'Dubai',
                           style: TextStyles.lightPrimary512,
                         )
                       ],
@@ -106,36 +107,41 @@ class HomeView extends StatelessWidget {
                     width: Get.width * 0.90,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
-                        border: Border.all(
-                            color: const Color(0xfff4f4f4), width: 1)),
+                      borderRadius: BorderRadius.circular(15),
+                      border:
+                          Border.all(color: const Color(0xfff4f4f4), width: 1),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 2),
                       child: TextFormField(
-                        onTap: () {},
+                        onChanged: (c) {
+                          controller.searchQuery.value = c;
+                        },
+                        controller: controller.search,
+                        cursorColor: AppTheme.primary,
+                        showCursor: true,
+                        style: TextStyles.black512.copyWith(
+                            color: Colors.black), // Ensure text color is set
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.search,
                             color: Colors.orange.shade700,
                             size: 30,
                           ),
-                          suffixIcon: IntrinsicHeight(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const VerticalDivider(
-                                  indent: 15,
-                                  endIndent: 15,
-                                  color: Colors.black26,
-                                ),
-                                Icon(
-                                  Icons.mic,
-                                  color: Colors.orange.shade700,
-                                ),
-                              ],
-                            ),
+                          suffixIcon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const VerticalDivider(
+                                indent: 15,
+                                endIndent: 15,
+                                color: Colors.black26,
+                              ),
+                              Icon(
+                                Icons.mic,
+                                color: Colors.orange.shade700,
+                              ),
+                            ],
                           ),
                           border: InputBorder.none,
                         ),
@@ -144,57 +150,63 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
                 verticalGap(context.height * .025),
-                ImageSwiper(),
+                Obx(() => controller.searchQuery.value == ""
+                    ? ImageSwiper()
+                    : const SizedBox()),
                 verticalGap(20),
-                const Text(
-                  'Categories',
-                  style: TextStyles.black516,
-                ),
+                Obx(() => controller.searchQuery.value == ""
+                    ? const Text(
+                        'Categories',
+                        style: TextStyles.black516,
+                      )
+                    : const SizedBox()),
                 verticalGap(20),
-                Container(
-                  alignment: Alignment.center,
-                  width: 335,
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x196F55A6),
-                        blurRadius: 20,
-                        offset: Offset(0, 2),
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: controller.exercises
-                        .map(
-                          (exercise) => Column(
-                            children: [
-                              Container(
-                                width: 70,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image:
-                                            NetworkImage(exercise['reps']!))),
-                              ),
-                              Text(
-                                exercise['catName']!,
-                              ),
-                            ],
+                Obx(() => controller.searchQuery.value == ""
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: 335,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        )
-                        .toList(),
-                  ),
-                ),
+                          shadows: const [
+                            BoxShadow(
+                              color: Color(0x196F55A6),
+                              blurRadius: 20,
+                              offset: Offset(0, 2),
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: controller.exercises
+                              .map(
+                                (exercise) => Column(
+                                  children: [
+                                    Container(
+                                      width: 70,
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  exercise['reps']!))),
+                                    ),
+                                    Text(
+                                      exercise['catName']!,
+                                    ),
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      )
+                    : const SizedBox()),
                 verticalGap(context.height * .01),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,18 +240,22 @@ class HomeView extends StatelessWidget {
                       itemCount: controller.products.length,
                       itemBuilder: (context, index) {
                         final product = controller.products[index];
-                        return FunctionalTileWidget(
-                          offer: product,
-                          name: product.title,
-                          image: product.image,
-                          onTap: () {
-                            Get.to(
-                                () => ProductDetailView(
-                                      product: product,
-                                    ),
-                                transition: Transition.fadeIn);
-                          },
-                        );
+                        return Obx(() => product.title
+                                .toLowerCase()
+                                .contains(controller.searchQuery.value)
+                            ? FunctionalTileWidget(
+                                offer: product,
+                                name: product.title,
+                                image: product.image,
+                                onTap: () {
+                                  Get.to(
+                                      () => ProductDetailView(
+                                            product: product,
+                                          ),
+                                      transition: Transition.fadeIn);
+                                },
+                              )
+                            : const SizedBox());
                       },
                     );
                   }
@@ -296,7 +312,7 @@ class HomeView extends StatelessWidget {
                   }
 
                   return SizedBox(
-                      height: context.height * 0.3,
+                      height: context.height * 0.33,
                       child: ListView.builder(
                           clipBehavior: Clip.none,
                           scrollDirection: Axis.horizontal,

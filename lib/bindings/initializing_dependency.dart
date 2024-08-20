@@ -2,9 +2,9 @@ import 'package:analytica_task/views/cart/controller/cart_controller.dart';
 import 'package:get/get.dart';
 import 'package:analytica_task/views/home/home/controller/home_controller.dart';
 import 'package:analytica_task/views/home/main/controller/main_home_controller.dart';
-import 'package:analytica_task/views/login/controller/login_controller.dart';
-import 'package:analytica_task/views/signup/controller/signup_controller.dart';
-import '../views/splash/controller/splash_controller.dart';
+import 'package:analytica_task/views/auth/login/controller/login_controller.dart';
+import 'package:analytica_task/views/auth/signup/controller/signup_controller.dart';
+import '../views/auth/splash/controller/splash_controller.dart';
 
 class InitializingDependency implements Bindings {
   @override

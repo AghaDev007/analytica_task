@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ProductDetailView extends StatelessWidget {
-  ProductDetailView({super.key, required this.product});
+  const ProductDetailView({super.key, required this.product});
 
   final ProductsModel product;
 
@@ -34,14 +34,16 @@ class ProductDetailView extends StatelessWidget {
                   Center(
                     child: Image.network(
                       product.image,
-                      height: 350,
+                      height: 270,
                       width: double.infinity,
                       fit: BoxFit.fill,
                     ),
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    product.title,
+                    product.title.length > 20
+                        ? '${product.title.substring(0, 20)}...'
+                        : product.title,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -49,7 +51,9 @@ class ProductDetailView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    product.title,
+                    product.title.length > 36
+                        ? '${product.title.substring(0, 36)}...'
+                        : product.title,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[700],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:analytica_task/utils/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +48,7 @@ class SignupController extends GetxController {
       passwords.clear();
       lastname.clear();
       Get.offNamed(AppRoutes.mainHome);
-      Get.snackbar("Success", "Account Registered!");
+      Get.snackbar("Success", "Account Registered!",backgroundColor: AppTheme.primary,colorText: AppTheme.white);
     } else {
       load(false);
       await auth.signOut();

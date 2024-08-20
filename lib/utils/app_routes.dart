@@ -1,8 +1,8 @@
 import 'package:analytica_task/views/home/main/view/main_home_view.dart';
-import 'package:analytica_task/views/login/view/login_view.dart';
-import 'package:analytica_task/views/signup/view/signup_view.dart';
+import 'package:analytica_task/views/auth/login/view/login_view.dart';
+import 'package:analytica_task/views/auth/signup/view/signup_view.dart';
 import 'package:get/get.dart';
-import '../views/splash/view/splash_view.dart';
+import '../views/auth/splash/view/splash_view.dart';
 
 class AppRoutes {
   static String splash = "/";

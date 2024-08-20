@@ -29,6 +29,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   get_storage: ^2.1.1
   uuid: ^4.4.2
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +45,7 @@ flutter:
 
   
   assets:
+    - assets/
     - assets/images/
     - assets/icons/
 

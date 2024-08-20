@@ -24,7 +24,7 @@ class ProductDetailController extends GetxController {
   Future addToCart(ProductsModel product) async {
     final user = FirebaseAuth.instance.currentUser;
     loading.value = true;
-    var uuid = Uuid().v1();
+    var uuid = const Uuid().v1();
     try {
       if (user != null && quantity.value > 0) {
         final cartItem = CartModel(

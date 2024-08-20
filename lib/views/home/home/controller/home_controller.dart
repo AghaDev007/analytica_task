@@ -3,6 +3,7 @@ import 'package:analytica_task/api_providers/products_api_provider.dart';
 import 'package:analytica_task/models/products_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:analytica_task/models/offers_model.dart';
 
@@ -10,9 +11,9 @@ import '../../../../utils/app_images.dart';
 
 class HomeController extends GetxController {
   var auth = FirebaseAuth.instance.currentUser;
-    var myCurrentIndex = 0.obs;
+  var myCurrentIndex = 0.obs;
   RxString searchQuery = "".obs;
-
+  TextEditingController search = TextEditingController();
   changeSearchQuery(String res) {
     searchQuery.value = res;
     update();

@@ -12,7 +12,7 @@ class SplashController extends GetxController {
   }
 
   void checkUserStatus() async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
 
     final user = auth.currentUser;
     if (user != null) {

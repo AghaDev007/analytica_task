@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544712702212",
+    "project_id": "analyticatask",
+    "storage_bucket": "analyticatask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544712702212:android:7219aa1a117bdd3842f851",
+        "android_client_info": {
+          "package_name": "com.example.analytica_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2l5a_KRbMXN_45wEJmVBwxvV9WAmGm8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
